@@ -2,14 +2,14 @@
 /*Typography
 --------------------------------------------------------------*/
 
-body, button, input, select, textarea {
+/* body, button, input, select, textarea {
     color: #404040;
     font-family: "Comfortaa", Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
     padding: 0;
     margin: 0;
-}
+} */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Patua One", serif;
