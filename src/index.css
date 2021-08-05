@@ -10,7 +10,18 @@
     padding: 0;
     margin: 0;
 } */
-
+body {
+    background-size: cover;
+    background-position-x: center;
+    background-image: url('././components/auth/logo.png');
+    z-index: 1;
+    min-height: 25rem;
+    min-width: 45rem;
+    padding: 0 5rem;
+    background-color: hsla(0,0%,100%,0.75);
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+}
 h1, h2, h3, h4, h5, h6 {
     font-family: "Patua One", serif;
     letter-spacing: 2px;

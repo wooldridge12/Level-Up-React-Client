@@ -12,7 +12,7 @@ export const EventList = (props) => {
     return (
         <article className="events">
             <header className="events__header">
-                <h1>Level Up Game Events</h1>
+                <h1>Level Up Events</h1>
             </header>
             {
                 events.map(event => {

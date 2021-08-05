@@ -1,3 +1,10 @@
 .game__name {
     font-weight: bolder;
 }
+
+.game {
+    border: solid goldenrod;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+}

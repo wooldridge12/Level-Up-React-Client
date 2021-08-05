@@ -5,15 +5,16 @@ import "./NavBar.css"
 export const NavBar = (props) => {
     return (
         <ul className="navbar">
-            <li className="navbar__item">
-                Navigation link
+            <img className="logo-image" src="https://www.pinclipart.com/picdir/middle/39-392368_school-border-cute-monsters-monster-party-art-for.png"></img>
+
+            <li className="nav-item">
+                <Link className="nav-link" to="/">Games</Link>
             </li>
-            <li className="navbar__item">
-                Navigation link
+            
+            <li className="nav-item">
+                <Link className="nav-link" to="/events">Events</Link>
             </li>
-            <li className="navbar__item">
-                Navigation link
-            </li>
+
             {
                 (localStorage.getItem("lu_token") !== null) ?
                     <li className="nav-item">
