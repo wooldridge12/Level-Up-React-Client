@@ -14,9 +14,11 @@ export const GameForm = () => {
     */
     const [currentGame, setCurrentGame] = useState({
         numberOfPlayers: 0,
+        gamer: localStorage.getItem("lu_token"),
         name: "",
         description: "",
         maker: "",
+        skillLevel: 0,
         gameTypeId: 0
     })
 
@@ -44,9 +46,9 @@ export const GameForm = () => {
         setCurrentGame(newGameState)
     }
 
-    const changeGameHostState = (event) => {
+    const changeGameMakerState = (event) => {
         const newGameState = { ...currentGame }
-        newGameState.host = event.target.value
+        newGameState.maker = event.target.value
         setCurrentGame(newGameState)
     }
 
@@ -67,6 +69,12 @@ export const GameForm = () => {
         newGameState.gameTypeId = event.target.value
         setCurrentGame(newGameState)
     }
+
+    const changeGameSkillLevelState = (event) => {
+        const newGameState = { ...currentGame }
+        newGameState.skillLevel = event.target.value
+        setCurrentGame(newGameState)
+    }
     /* REFACTOR CHALLENGE END */
 
     return (
@@ -84,10 +92,10 @@ export const GameForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="host">Host: </label>
-                    <input type="text" name="host" required autoFocus className="form-control"
-                        value={currentGame.host}
-                        onChange={changeGameHostState}
+                    <label htmlFor="maker">Host: </label>
+                    <input type="text" name="maker" required autoFocus className="form-control"
+                        value={currentGame.maker}
+                        onChange={changeGameMakerState}
                     />
                 </div>
             </fieldset>
@@ -114,14 +122,22 @@ export const GameForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="gametype">Game Type: </label>
-                    {/* <input type="text" name="gametype" required autoFocus className="form-control"
-                        value={currentGame.gameTypes}
-                        onChange={changeGameTypeState}
-                    /> */}
+                    <label htmlFor="skillLevel">Skill Level: </label>
+                    <input type="number" name="skillLevel" required autoFocus className="form-control"
+                        value={currentGame.skillLevel}
+                        onChange={changeGameSkillLevelState}
+                        changeGameSkillLevelState
+                    />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="gameType">Game Type: </label>
+
                     <select name="gametype" id="gametype"
                     onChange={changeGameTypeState}>
-                        <option value="0">Please select a game type</option>
+                        <option value="0">Select a game type...</option>
                         {
                             gameTypes.map(type => {
                                 //label, id
@@ -130,8 +146,10 @@ export const GameForm = () => {
                             })
                         }
                     </select>
+
                 </div>
             </fieldset>
+
 
             {/* You create the rest of the input fields for each game property */}
 
@@ -143,14 +161,15 @@ export const GameForm = () => {
                     const game = {
                         maker: currentGame.maker,
                         name: currentGame.name,
-                        number_of_players: parseInt(currentGame.numberOfPlayers),
+                        numberOfPlayers: parseInt(currentGame.numberOfPlayers),
                         description: currentGame.description,
-                        game_type: parseInt(currentGame.gameTypeId)
+                        gameTypeId: parseInt(currentGame.gameTypeId),
+                        skillLevel: parseInt(currentGame.skillLevel)
                     }
 
                     // Send POST request to your API
                     createGame(game)
-                        .then(() => history.push("/games"))
+                        .then(() => history.push("/"))
                 }}
                 className="btn btn-primary">Create</button>
         </form>
