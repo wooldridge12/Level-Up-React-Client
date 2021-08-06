@@ -1,13 +1,16 @@
+import { createEvent } from "@testing-library/react"
 import React, { useContext, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { GameContext } from "../game/GameProvider"
+import { EventContext } from "./EventProvider"
 
 
 export const EventForm = () => {
     const history = useHistory()
-    const { getGames, games } = useContext(GameContext)
-    const [currentEvent, setEvent] = useState({
-        game: "",
+    const { games, getGames } = useContext(GameContext)
+    const { createEvent } = useContext(EventContext)
+    const [currentEvent, setCurrentEvent] = useState({
+        gameId: "",
         date: "",
         time: "",
         description: "",
@@ -21,7 +24,7 @@ export const EventForm = () => {
 
     const changeEventGameState = (domEvent) => {
         const newEventGameState = { ...currentEvent }
-        newEventGameState.game = domEvent.target.value
+        newEventGameState.gameId = domEvent.target.value
         setCurrentEvent(newEventGameState)
     }
 
@@ -65,17 +68,19 @@ export const EventForm = () => {
 
                     <select name="eventGame" className="form-control"
                         value={ currentEvent.gameId }
-                        onChange={ changeEventGameState }>
+                        onChange={changeEventGameState}>
                         <option value="0">Select a game...</option>
                         {
                             games.map(game => {
-                              return( <option value={game.id}>{game.label}</option>
+                              return( <option value={game.id}>{game.name}</option>
                               )
                               })
                         }
                     </select>
                 </div>
             </fieldset>
+
+
 
             <fieldset>
                 <div className="form-group">
@@ -87,6 +92,46 @@ export const EventForm = () => {
                 </div>
             </fieldset>
 
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="time">Time:</label>
+                    <input type="time" name="time" required autoFocus className="form-control"
+                        value={currentEvent.time}
+                        onChange={changeEventTimeState}
+                        />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="description">Decription:</label>
+                    <input type="description" name="description" required autoFocus className="form-control"
+                        value={currentEvent.description}
+                        onChange={changeEventDescriptionState}
+                        />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="title">Title:</label>
+                    <input type="title" name="title" required autoFocus className="form-control"
+                        value={currentEvent.title}
+                        onChange={changeEventTitleState}
+                        />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="attendees">Attendees:</label>
+                    <input type="attendees" name="attendees" required autoFocus className="form-control"
+                        value={currentEvent.attendees}
+                        onChange={changeEventAttendeesState}
+                        />
+                </div>
+            </fieldset>
+
             {/* Create the rest of the input fields */}
 
             <button type="submit"
@@ -94,9 +139,19 @@ export const EventForm = () => {
                     evt.preventDefault()
 
                     // Create the event
+                    const event = {
+                        gameId: parseInt(currentEvent.gameId),
+                        date: currentEvent.date,
+                        time: currentEvent.time,
+                        description: currentEvent.description,
+                        title: currentEvent.title,
+                        attendees: parseInt(currentEvent.attendees)
+                    }
 
 
                     // Once event is created, redirect user to event list
+                    createEvent(event)
+                        .then(() => history.push("/events"))
                 }}
                 className="btn btn-primary">Create Event</button>
         </form>
