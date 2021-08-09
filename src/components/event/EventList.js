@@ -26,10 +26,11 @@ export const EventList = (props) => {
             {
                 events.map(event => {
                     return <section key={event.id} className="registration">
-                        <div className="registration__game">{event.game.name}</div>
-                        <div>{event.description}</div>
-                        <div>
-                            {
+                        <div className="registration__event_title">{event.title}</div>
+                        <div className="registration__event_name">{event.game.name}</div>
+                        <div>Description: {event.game.description}</div>
+                        <div> 
+                            Time:  {
                                 new Date(event.date).toLocaleDateString("en-US",
                                 {
                                     weekday: 'long',
@@ -40,6 +41,7 @@ export const EventList = (props) => {
                             }
                             @ {event.time}
                         </div>
+                        <div className="registration__event">{event.attendees}</div>
                     </section>
                 })
             }
