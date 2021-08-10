@@ -105,7 +105,7 @@ export const EventForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Decription:</label>
-                    <input type="description" name="description" required autoFocus className="form-control"
+                    <input type="text" name="description" required autoFocus className="form-control"
                         value={currentEvent.description}
                         onChange={changeEventDescriptionState}
                         />
@@ -115,7 +115,7 @@ export const EventForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title:</label>
-                    <input type="title" name="title" required autoFocus className="form-control"
+                    <input type="text" name="title" required autoFocus className="form-control"
                         value={currentEvent.title}
                         onChange={changeEventTitleState}
                         />
@@ -125,7 +125,7 @@ export const EventForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="attendees">Attendees:</label>
-                    <input type="attendees" name="attendees" required autoFocus className="form-control"
+                    <input type="number" name="attendees" required autoFocus className="form-control"
                         value={currentEvent.attendees}
                         onChange={changeEventAttendeesState}
                         />
