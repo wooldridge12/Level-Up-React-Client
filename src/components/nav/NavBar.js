@@ -6,7 +6,9 @@ export const NavBar = (props) => {
     return (
         <ul className="navbar">
             <img className="logo-image" src="https://www.pinclipart.com/picdir/middle/39-392368_school-border-cute-monsters-monster-party-art-for.png"></img>
-
+            <li className="nav-item">
+                <Link className="nav-link" to="/profile">Profile</Link>
+            </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/">Games</Link>
             </li>
